@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/style.css" />
+    <script src="script.js"></script>
+    <title>Budgeting Web App</title>
+  </head>
+
+  <body>
+    <header class="header">
+      <p class="heading-primary">Budgeting Web Application</p>
+    </header>
+
+    <main>
+      <section class="section-all-categories">
+        <div class="heading-secondary">
+          <p>Monthly Income:</p>
+          <input
+            type="number"
+            id="income-input"
+            placeholder="Enter monthly income"
+          />
+          <button class="btn" id="income-btn">Set Income</button>
+        </div>
+        <div class="container grid grid--3-cols">
+          <div class="section-category">
+            <p class="heading-secondary">Bills</p>
+            <div class="category-items">test</div>
+          </div>
+          <div class="section-category">
+            <p class="heading-secondary">Groceries</p>
+            <div class="category-items">test</div>
+          </div>
+          <div class="section-category">
+            <p class="heading-secondary">Other</p>
+            <div class="category-items">test</div>
+          </div>
+        </div>
+
+        <div class="heading-secondary">
+          <p>Amount Leftover:</p>
+          <a href="#" class="btn">+Calculate</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
