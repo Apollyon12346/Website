@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 //object the API use to create a category/call the service layer
 //separate from the CreateCategoryRequest because we want to separate the presentation and service layer
 //stores all nesscary info
-public record CreateCategoryRequestDto(
+public record UpdateCategoryRequestDto(
         //checks if first title is not null but others can, then checks if the title is less than 255 char
         //checks if the description is less than 1000 char
         //checks if entered balance is greater or equal to 0
@@ -48,7 +48,7 @@ public record CreateCategoryRequestDto(
         @PositiveOrZero(message = ERROR_MESSAGE_NEGATIVE_BUDGET)
         double budgetcat3,
 
-        int totalbudget
+        double totalbudget
 ) {
     private static final String ERROR_MESSAGE_TITLE =
             "Category title must be length between 1 to 255 characters.";
