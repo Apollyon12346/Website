@@ -30,7 +30,7 @@ public class BudgetCategory {
     private String description1;
 
     @Column(name = "budget1")
-    private int budgetcat1;
+    private double budgetcat1;
 
     //name in database is categoryname
     @Column(name = "categoryname2")
@@ -41,7 +41,7 @@ public class BudgetCategory {
     private String description2;
 
     @Column(name = "budget2")
-    private int budgetcat2;
+    private double budgetcat2;
 
     //name in database is categoryname
     @Column(name = "categoryname3")
@@ -52,17 +52,17 @@ public class BudgetCategory {
     private String description3;
 
     @Column(name = "budget3")
-    private int budgetcat3;
+    private double budgetcat3;
 
     @Column(name = "total_budget")
-    private int totalbudget = budgetcat1+budgetcat2+budgetcat3;
+    private double totalbudget = budgetcat1+budgetcat2+budgetcat3;
 
 
     //constructor, getter, and setters
     public BudgetCategory() {
     }
 
-    public BudgetCategory(UUID id, String categoryName, String categoryName1, String description1, int budgetcat1, String categoryName2, String description2, int budgetcat2, String categoryName3, String description3, int budgetcat3, int totalbudget) {
+    public BudgetCategory(UUID id, String categoryName, String categoryName1, String description1, double budgetcat1, String categoryName2, String description2, double budgetcat2, String categoryName3, String description3, double budgetcat3, double totalbudget) {
         this.id = id;
         this.categoryName = categoryName;
         this.categoryName1 = categoryName1;
@@ -93,7 +93,7 @@ public class BudgetCategory {
         return description1;
     }
 
-    public int getBudgetcat1() {
+    public double getBudgetcat1() {
         return budgetcat1;
     }
 
@@ -105,7 +105,7 @@ public class BudgetCategory {
         return description2;
     }
 
-    public int getBudgetcat2() {
+    public double getBudgetcat2() {
         return budgetcat2;
     }
 
@@ -117,15 +117,15 @@ public class BudgetCategory {
         return description3;
     }
 
-    public int getBudgetcat3() {
+    public double getBudgetcat3() {
         return budgetcat3;
     }
 
-    public int getTotalbudget() {
+    public double getTotalbudget() {
         return totalbudget;
     }
 
-    public void setBudgetcat3(int budgetcat3) {
+    public void setBudgetcat3(double budgetcat3) {
         this.budgetcat3 = budgetcat3;
     }
 
@@ -141,7 +141,7 @@ public class BudgetCategory {
         this.categoryName3 = categoryName3;
     }
 
-    public void setBudgetcat2(int budgetcat2) {
+    public void setBudgetcat2(double budgetcat2) {
         this.budgetcat2 = budgetcat2;
     }
 
@@ -153,7 +153,7 @@ public class BudgetCategory {
         this.categoryName2 = categoryName2;
     }
 
-    public void setBudgetcat1(int budgetcat1) {
+    public void setBudgetcat1(double budgetcat1) {
         this.budgetcat1 = budgetcat1;
     }
 
@@ -169,7 +169,7 @@ public class BudgetCategory {
         this.id = id;
     }
 
-    public void setTotalbudget(int totalbudget) {
+    public void setTotalbudget(double totalbudget) {
         this.totalbudget = totalbudget;
     }
 
