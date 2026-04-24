@@ -72,5 +72,5 @@ public class CategoryServiceImpl implements CategoryService{
     public void deleteCategory(UUID categoryid) {
         categoryRepository.deleteById(categoryid);
     }
-    }
+
 }
