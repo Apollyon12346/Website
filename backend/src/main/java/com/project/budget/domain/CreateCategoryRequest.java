@@ -5,14 +5,14 @@ public record CreateCategoryRequest(
         String categoryName,
         String categoryName1,
         String description1,
-        int budgetcat1,
+        double budgetcat1,
         String categoryName2,
         String description2,
-        int budgetcat2,
+        double budgetcat2,
         String categoryName3,
         String description3,
-        int budgetcat3,
-        int totalbudget
+        double budgetcat3,
+        double totalbudget
 ) {
 
 }
