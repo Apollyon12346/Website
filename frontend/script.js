@@ -1,73 +1,92 @@
-let expenses = [];
 let income = 0;
-let nextId = 1;
-let activeCategory = null;
+let categoryTotals = { bills: 0, groceries: 0, other: 0 };
 
-// Modal open
-document.querySelectorAll(".btn-add-expense").forEach(function (button) {
+// Income
+document.getElementById("income-btn").addEventListener("click", function () {
+  const value = parseFloat(document.getElementById("income-input").value);
+  if (!value || value <= 0) return;
+  income = value;
+  document.getElementById("income-display").textContent =
+    `Monthly Income: $${income}`;
+});
+
+// Submit
+document.querySelectorAll(".btn-submit").forEach(function (button) {
   button.addEventListener("click", function () {
-    activeCategory = this.dataset.category;
-    document.getElementById("modal-overlay").classList.remove("hidden");
+    const category = this.dataset.category;
+    const column = document.querySelector(
+      `.category-column[data-category="${category}"]`,
+    );
+    const rows = column.querySelectorAll(".expense-row");
+    const errorEl = document.getElementById(`error-${category}`);
+
+    const names = [];
+    const descs = [];
+    const budgets = [];
+
+    let valid = true;
+
+    rows.forEach(function (row) {
+      const name = row.querySelector(".input-name").value.trim();
+      const desc = row.querySelector(".input-desc").value.trim();
+      const budget = parseFloat(row.querySelector(".input-budget").value);
+
+      if (!name || !budget || budget < 0) valid = false;
+
+      names.push(name);
+      descs.push(desc);
+      budgets.push(budget || 0);
+    });
+
+    if (!valid) {
+      errorEl.classList.remove("hidden");
+      return;
+    }
+
+    errorEl.classList.add("hidden");
+
+    const total = budgets.reduce((sum, b) => sum + b, 0);
+    categoryTotals[category] = total;
+    document.getElementById(`total-${category}`).textContent =
+      `Total: $${total}`;
+
+    const payload = {
+      categoryName: category,
+      categoryName1: names[0],
+      description1: descs[0],
+      budgetcat1: budgets[0],
+      categoryName2: names[1],
+      description2: descs[1],
+      budgetcat2: budgets[1],
+      categoryName3: names[2],
+      description3: descs[2],
+      budgetcat3: budgets[2],
+      totalbudget: total,
+    };
+
+    console.log("Sending to backend:", payload);
+
+    //backend
+
+    fetch("http://localhost:8080/api/v1/budget", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("Response:", data))
+      .catch((err) => console.error("Error:", err));
   });
 });
 
-// Modal cancel
-document.getElementById("btn-cancel").addEventListener("click", function () {
-  closeModal();
+// Calculate leftover
+document.getElementById("btn-calculate").addEventListener("click", function () {
+  const totalExpenses = Object.values(categoryTotals).reduce(
+    (sum, t) => sum + t,
+    0,
+  );
+  const leftover = income - totalExpenses;
+  const display = document.getElementById("leftover-display");
+  display.textContent = `Amount Leftover: $${leftover.toFixed(2)}`;
+  display.style.color = leftover >= 0 ? "green" : "red";
 });
-
-// Modal confirm
-document.getElementById("btn-confirm").addEventListener("click", function () {
-  const title = document.getElementById("expense-title").value.trim();
-  const description = document
-    .getElementById("expense-description")
-    .value.trim();
-  const budget = parseFloat(document.getElementById("expense-budget").value);
-  const errorEl = document.getElementById("modal-error");
-
-  // Validation
-  if (!title || !budget || budget < 0) {
-    errorEl.classList.remove("hidden");
-    return;
-  }
-
-  errorEl.classList.add("hidden");
-
-  const expense = {
-    id: nextId++,
-    title,
-    description,
-    budget,
-    category: activeCategory,
-  };
-
-  expenses.push(expense);
-  renderExpense(expense);
-  updateTotal(activeCategory);
-  closeModal();
-});
-
-function renderExpense(expense) {
-  const list = document.getElementById(`list-${expense.category}`);
-  const li = document.createElement("li");
-  li.textContent = expense.description
-    ? `${expense.title} - $${expense.budget} (${expense.description})`
-    : `${expense.title} - $${expense.budget}`;
-  list.appendChild(li);
-}
-
-function updateTotal(category) {
-  const total = expenses
-    .filter((e) => e.category === category)
-    .reduce((sum, e) => sum + e.budget, 0);
-  document.getElementById(`total-${category}`).textContent = `Total: $${total}`;
-}
-
-function closeModal() {
-  document.getElementById("modal-overlay").classList.add("hidden");
-  document.getElementById("expense-title").value = "";
-  document.getElementById("expense-description").value = "";
-  document.getElementById("expense-budget").value = "";
-  document.getElementById("modal-error").classList.add("hidden");
-  activeCategory = null;
-}

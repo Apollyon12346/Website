@@ -14,83 +14,112 @@
     </header>
 
     <main>
-      <section class="section-categories">
-        <div class="heading-secondary">
-          <p>Monthly Income:</p>
-          <input
-            type="number"
-            id="income-input"
-            placeholder="Enter monthly income"
-          />
+<section class="section-income">
+        <p class="heading-secondary">Monthly Income:</p>
+        <div class="income-row">
+          <input type="number" id="income-input" placeholder="Enter monthly income" />
           <button class="btn" id="income-btn">Set Income</button>
         </div>
+        <p id="income-display"></p>
+      </section>
+
+      <section class="section-categories">
         <div class="container grid grid--3-cols">
           <div class="category-column" data-category="bills">
             <p class="heading-secondary">Bills</p>
-            <ul class="expense-list" id="list-bills"></ul>
+            <div class="expense-row">
+              <input type="text" placeholder="Name" class="input-name" />
+              <input type="text" placeholder="Description" class="input-desc" />
+              <input
+                type="number"
+                placeholder="Budget"
+                class="input-budget"
+                min="0"
+              />
+            </div>
+            <div class="expense-row">
+              <input type="text" placeholder="Name" class="input-name" />
+              <input type="text" placeholder="Description" class="input-desc" />
+              <input
+                type="number"
+                placeholder="Budget"
+                class="input-budget"
+                min="0"
+              />
+            </div>
+            <div class="expense-row">
+              <input type="text" placeholder="Name" class="input-name" />
+              <input type="text" placeholder="Description" class="input-desc" />
+              <input
+                type="number"
+                placeholder="Budget"
+                class="input-budget"
+                min="0"
+              />
+            </div>
             <p class="category-total" id="total-bills">Total: $0</p>
-            <button class="btn btn-add-expense" data-category="bills">
-              + Add Expense
+            <p class="error-msg hidden" id="error-bills">
+              Please fill in all name and budget fields.
+            </p>
+            <button class="btn btn-submit" data-category="bills">
+              Submit Bills
             </button>
           </div>
 
           <div class="category-column" data-category="groceries">
             <p class="heading-secondary">Groceries</p>
-            <ul class="expense-list" id="list-groceries"></ul>
+            <div class="expense-row">
+              <input type="text" placeholder="Name" class="input-name" />
+              <input type="text" placeholder="Description" class="input-desc" />
+              <input type="number" placeholder="Budget" class="input-budget" min="0" />
+            </div>
+            <div class="expense-row">
+              <input type="text" placeholder="Name" class="input-name" />
+              <input type="text" placeholder="Description" class="input-desc" />
+              <input type="number" placeholder="Budget" class="input-budget" min="0" />
+            </div>
+            <div class="expense-row">
+              <input type="text" placeholder="Name" class="input-name" />
+              <input type="text" placeholder="Description" class="input-desc" />
+              <input type="number" placeholder="Budget" class="input-budget" min="0" />
+            </div>
             <p class="category-total" id="total-groceries">Total: $0</p>
-            <button class="btn btn-add-expense" data-category="groceries">
-              + Add Expense
-            </button>
+            <p class="error-msg hidden" id="error-groceries">Please fill in all name and budget fields.</p>
+            <button class="btn btn-submit" data-category="groceries">Submit Groceries</button>
           </div>
 
           <div class="category-column" data-category="other">
             <p class="heading-secondary">Other</p>
-            <ul class="expense-list" id="list-other"></ul>
+            <div class="expense-row">
+              <input type="text" placeholder="Name" class="input-name" />
+              <input type="text" placeholder="Description" class="input-desc" />
+              <input type="number" placeholder="Budget" class="input-budget" min="0" />
+            </div>
+            <div class="expense-row">
+              <input type="text" placeholder="Name" class="input-name" />
+              <input type="text" placeholder="Description" class="input-desc" />
+              <input type="number" placeholder="Budget" class="input-budget" min="0" />
+            </div>
+            <div class="expense-row">
+              <input type="text" placeholder="Name" class="input-name" />
+              <input type="text" placeholder="Description" class="input-desc" />
+              <input type="number" placeholder="Budget" class="input-budget" min="0" />
+            </div>
             <p class="category-total" id="total-other">Total: $0</p>
-            <button class="btn btn-add-expense" data-category="other">
-              + Add Expense
-            </button>
+            <p class="error-msg hidden" id="error-other">Please fill in all name and budget fields.</p>
+            <button class="btn btn-submit" data-category="other">Submit Other</button>
           </div>
         </div>
+        </div>
 
+        <section class="section-leftover">
         <div class="heading-secondary">
-          <p>Amount Leftover:</p>
+          <p class=>Amount Leftover:</p>
           <button class="btn" id="btn-calculate">Calculate Leftover</button>
           <p id="leftover-display"></p>
         </div>
+        </section>
       </section>
-
-      <!-- Modal -->
-      <div class="modal-overlay hidden" id="modal-overlay">
-        <div class="modal">
-          <h3 class="modal-title">Add Expense</h3>
-          <input
-            type="text"
-            id="expense-title"
-            placeholder="Title (required)"
-            maxlength="255"
-          />
-          <input
-            type="text"
-            id="expense-description"
-            placeholder="Description (optional)"
-            maxlength="1000"
-          />
-          <input
-            type="number"
-            id="expense-budget"
-            placeholder="Amount"
-            min="0"
-          />
-          <div class="modal-buttons">
-            <button class="btn" id="btn-confirm">Add</button>
-            <button class="btn btn-cancel" id="btn-cancel">Cancel</button>
-          </div>
-          <p class="modal-error hidden" id="modal-error">
-            Please fill in all required fields.
-          </p>
-        </div>
-      </div>
     </main>
     <script src="script.js"></script>
   </body>
