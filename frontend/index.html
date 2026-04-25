@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
     <title>Budgeting Web App</title>
   </head>
 
@@ -15,7 +14,7 @@
     </header>
 
     <main>
-      <section class="section-all-categories">
+      <section class="section-categories">
         <div class="heading-secondary">
           <p>Monthly Income:</p>
           <input
@@ -26,25 +25,73 @@
           <button class="btn" id="income-btn">Set Income</button>
         </div>
         <div class="container grid grid--3-cols">
-          <div class="section-category">
+          <div class="category-column" data-category="bills">
             <p class="heading-secondary">Bills</p>
-            <div class="category-items">test</div>
+            <ul class="expense-list" id="list-bills"></ul>
+            <p class="category-total" id="total-bills">Total: $0</p>
+            <button class="btn btn-add-expense" data-category="bills">
+              + Add Expense
+            </button>
           </div>
-          <div class="section-category">
+
+          <div class="category-column" data-category="groceries">
             <p class="heading-secondary">Groceries</p>
-            <div class="category-items">test</div>
+            <ul class="expense-list" id="list-groceries"></ul>
+            <p class="category-total" id="total-groceries">Total: $0</p>
+            <button class="btn btn-add-expense" data-category="groceries">
+              + Add Expense
+            </button>
           </div>
-          <div class="section-category">
+
+          <div class="category-column" data-category="other">
             <p class="heading-secondary">Other</p>
-            <div class="category-items">test</div>
+            <ul class="expense-list" id="list-other"></ul>
+            <p class="category-total" id="total-other">Total: $0</p>
+            <button class="btn btn-add-expense" data-category="other">
+              + Add Expense
+            </button>
           </div>
         </div>
 
         <div class="heading-secondary">
           <p>Amount Leftover:</p>
-          <a href="#" class="btn">+Calculate</a>
+          <button class="btn" id="btn-calculate">Calculate Leftover</button>
+          <p id="leftover-display"></p>
         </div>
       </section>
+
+      <!-- Modal -->
+      <div class="modal-overlay hidden" id="modal-overlay">
+        <div class="modal">
+          <h3 class="modal-title">Add Expense</h3>
+          <input
+            type="text"
+            id="expense-title"
+            placeholder="Title (required)"
+            maxlength="255"
+          />
+          <input
+            type="text"
+            id="expense-description"
+            placeholder="Description (optional)"
+            maxlength="1000"
+          />
+          <input
+            type="number"
+            id="expense-budget"
+            placeholder="Amount"
+            min="0"
+          />
+          <div class="modal-buttons">
+            <button class="btn" id="btn-confirm">Add</button>
+            <button class="btn btn-cancel" id="btn-cancel">Cancel</button>
+          </div>
+          <p class="modal-error hidden" id="modal-error">
+            Please fill in all required fields.
+          </p>
+        </div>
+      </div>
     </main>
+    <script src="script.js"></script>
   </body>
 </html>
